@@ -77,16 +77,15 @@ export default function Home() {
     const timeTaken = (Date.now() - startTime) / 1000; // Time taken in seconds
     const timeBonus = Math.max(0, 10 - timeTaken);  // 10 is max bonus, subtract time taken
 
-    setSelectedAnswer(selectedSong); // Mark the selected answer
+    setSelectedAnswer(selectedSong); 
 
     if (selectedSong === correctSong) {
-      setScore(score + Math.floor(100 + timeBonus * 10));  // Base score of 100 plus time-based bonus
-      setIsCorrect(true);  // Mark as correct
+      setScore(score + Math.floor(100 + timeBonus * 10));  
+      setIsCorrect(true); 
     } else {
-      setIsCorrect(false);  // Mark as incorrect
+      setIsCorrect(false); 
     }
 
-    // After a delay, move to the next question or end the quiz
     setTimeout(() => {
       if (currentQuestion < tracks.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
@@ -95,7 +94,7 @@ export default function Home() {
         alert(`Quiz Finished! Your final score: ${score}`);
         setQuizStarted(false);
       }
-    }, 1500);  // Delay of 1.5 seconds before moving to the next question
+    }, 1500);  
   };
 
   // Handle volume changes
@@ -110,7 +109,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold mb-6">Spotify Music Quiz</h1>
-      <p className="text-2xl">Score: {score}</p>  {/* Display the current score */}
+      <p className="text-2xl">Score: {score}</p>  
       
       {!quizStarted ? (
         <>
@@ -136,7 +135,7 @@ export default function Home() {
             <h2 className="text-2xl mb-4">
               What song is this snippet from? (Track {currentQuestion + 1} / {tracks.length})
             </h2>
-            <audio ref={audioRef} src={tracks[currentQuestion]?.track.preview_url} controls={false} autoPlay></audio>  {/* Audio player without controls */}
+            <audio ref={audioRef} src={tracks[currentQuestion]?.track.preview_url} controls={false} autoPlay></audio>  
             <div className="flex justify-center mt-4">
               <label htmlFor="volume" className="mr-2">Volume:</label>
               <input
@@ -157,7 +156,7 @@ export default function Home() {
                   className={`bg-gray-300 text-black px-4 py-2 m-2 rounded-lg 
                     ${selectedAnswer === song ? (isCorrect ? 'bg-green-500' : 'bg-red-500') : ''}`}
                   onClick={() => handleAnswer(song)}
-                  disabled={selectedAnswer !== null} // Disable after selecting an answer
+                  disabled={selectedAnswer !== null} 
                 >
                   {song}
                 </button>
